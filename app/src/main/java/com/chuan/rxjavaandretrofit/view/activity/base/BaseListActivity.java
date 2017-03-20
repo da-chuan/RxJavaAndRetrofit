@@ -8,6 +8,8 @@ import com.andview.refreshview.XRefreshView;
 import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.chuan.rxjavaandretrofit.R;
 import com.chuan.rxjavaandretrofit.bean.base.BaseBean;
+import com.chuan.rxjavaandretrofit.wiget.MyXRefreshViewFooter;
+import com.chuan.rxjavaandretrofit.wiget.MyXRefreshViewHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public abstract class BaseListActivity extends BaseActivity implements XRefreshV
         mXRefreshView.setPullRefreshEnable(true);
         mXRefreshView.setAutoLoadMore(false);
         mXRefreshView.setXRefreshViewListener(this);
+        mXRefreshView.setCustomHeaderView(new MyXRefreshViewHeader(getApplicationContext()));
+        mXRefreshView.setCustomFooterView(new MyXRefreshViewFooter(getApplicationContext()));
         recyclerView = (RecyclerView) current.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
