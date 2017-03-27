@@ -37,7 +37,6 @@ public abstract class BaseListActivity extends BaseActivity implements XRefreshV
         mXRefreshView.setAutoLoadMore(false);
         mXRefreshView.setXRefreshViewListener(this);
         mXRefreshView.setCustomHeaderView(new MyXRefreshViewHeader(getApplicationContext()));
-        mXRefreshView.setCustomFooterView(new MyXRefreshViewFooter(getApplicationContext()));
         recyclerView = (RecyclerView) current.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

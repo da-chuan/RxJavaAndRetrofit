@@ -1,7 +1,14 @@
 package com.chuan.rxjavaandretrofit.net;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
 
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -28,7 +35,14 @@ public class OKHttpUtils {
                 if (client == null){
                     OkHttpClient.Builder builder = new OkHttpClient.Builder()
                             .readTimeout(READ_OUT_TIME, TimeUnit.SECONDS)
-                            .connectTimeout(CONNECT_OUT_TIME, TimeUnit.SECONDS);
+                            .connectTimeout(CONNECT_OUT_TIME, TimeUnit.SECONDS)
+                            .sslSocketFactory(HttpsCerts.getSocketFactory())
+                            .hostnameVerifier(new HostnameVerifier() {
+                                @Override
+                                public boolean verify(String hostname, SSLSession session) {
+                                    return true;
+                                }
+                            });
                     builder.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
@@ -62,6 +76,7 @@ public class OKHttpUtils {
         }
         return headers;
     }
+
 
 
 }
